@@ -27,3 +27,21 @@ def compile_pattern(pattern_str, ignore_case=True):
     """
     flags = re.IGNORECASE if ignore_case else 0
     return re.compile(pattern_str, flags)
+    
+def find_matches_in_file(input_path, pattern):
+    """
+    Find all matches of a regex pattern in a file.
+
+    Args:
+        input_path (str): Path to the input text file.
+        pattern (re.Pattern): Compiled regex pattern.
+
+    Yields:
+        tuple: (line_number, matched_word)
+    """
+    with open(input_path, 'r') as infile:
+        for line_number, line in enumerate(infile, start=1):
+            matches = pattern.findall(line)
+            for match in matches:
+                yield line_number, match
+
