@@ -60,3 +60,19 @@ def write_matches(output_path, matches):
             out_file.write(f"{line_number}\t{word}\n")
 
 
+def main():
+    """
+    Main execution function.
+
+    Defines the pattern for heritability-related words,
+    processes the input file, and writes results to output file.
+    """
+    input_file = "origin.txt"
+    output_file = "heritability_related.txt"
+
+    # Flexible regex patterns
+    pattern_str = r'\b(inherit\w*|heritable\w*)\b'
+
+    pattern = compile_pattern(pattern_str)
+    matches = find_matches_in_file(input_file, pattern)
+    write_matches(output_file, matches)
