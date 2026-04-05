@@ -27,6 +27,7 @@ def compile_pattern(pattern_str, ignore_case=True):
     """
     flags = re.IGNORECASE if ignore_case else 0
     return re.compile(pattern_str, flags)
+
     
 def find_matches_in_file(input_path, pattern):
     """
@@ -39,9 +40,23 @@ def find_matches_in_file(input_path, pattern):
     Yields:
         tuple: (line_number, matched_word)
     """
-    with open(input_path, 'r') as infile:
-        for line_number, line in enumerate(infile, start=1):
+    with open(input_path, 'r') as in_file:
+        for line_number, line in enumerate(in_file, start=1):
             matches = pattern.findall(line)
             for match in matches:
                 yield line_number, match
+
+
+def write_matches(output_path, matches):
+    """
+    Write matches to an output file.
+
+    Args:
+        output_path (str): Path to the output file.
+        matches (iterable): Iterable of (line_number, word) tuples.
+    """
+    with open(output_path, 'w') as out_file:
+        for line_number, word in matches:
+            out_file.write(f"{line_number}\t{word}\n")
+
 
