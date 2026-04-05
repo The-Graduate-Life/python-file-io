@@ -76,3 +76,6 @@ def main():
     pattern = compile_pattern(pattern_str)
     matches = find_matches_in_file(input_file, pattern)
     write_matches(output_file, matches)
+
+if __name__ == '__main__':
+    main()
